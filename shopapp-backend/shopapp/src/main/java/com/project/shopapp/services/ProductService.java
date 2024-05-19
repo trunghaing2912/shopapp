@@ -55,11 +55,7 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public Product updateProduct(
-            long id,
-            ProductDTO productDTO
-    )
-            throws Exception {
+    public Product updateProduct(long id, ProductDTO productDTO) throws Exception {
         Product existingProduct = getProductById(id);
         if (existingProduct != null) {
             //copy các thuộc tính từ DTO -> Product
@@ -92,11 +88,9 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public ProductImage createProductImage(
-            Long productId,
-            ProductImageDTO productImageDTO) throws Exception {
+    public ProductImage createProductImage(Long productId, ProductImageDTO productImageDTO) throws Exception {
         Product existingProduct = productRepository
-                .findById(productImageDTO.getProductId())
+                .findById(productId)
                 .orElseThrow(() ->
                         new DataNotFoundException(
                                 "Cannot find product with id: " + productImageDTO.getProductId()));
@@ -106,8 +100,8 @@ public class ProductService implements IProductService {
                 .build();
         //Ko cho insert quá 5 ảnh cho 1 sản phẩm
         int size = productImageRepository.findByProductId(productId).size();
-        if (size >= 5) {
-            throw new InvalidParamException("Number of images must be <= 5");
+        if (size >= ProductImage.MAXIMUM_IMAGE_PER_PRODUCT) {
+            throw new InvalidParamException("Number of images must be <= " + ProductImage.MAXIMUM_IMAGE_PER_PRODUCT);
         }
         return productImageRepository.save(newProductImage);
     }
