@@ -13,6 +13,4 @@ public class CategoryDTO {
     @NotEmpty(message = "Category's name cannot be empty")
     private String name;
 
-
-
 }

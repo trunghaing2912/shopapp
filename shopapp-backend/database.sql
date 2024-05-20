@@ -111,3 +111,8 @@ CREATE TABLE order_details(
     total_money FLOAT CHECK(total_money >= 0),
     color VARCHAR(20) DEFAULT ''
 );
+
+INSERT INTO categories VALUES (1, "đồ điện từ");
+INSERT INTO categories VALUES (2, "bánh kẹo");
+INSERT INTO categories VALUES (3, "đồ gia dụng");
+INSERT INTO categories VALUES (4, "phụ kiện");

@@ -15,6 +15,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class ProductDTO {
 
     @NotBlank(message = "Title is required")
@@ -32,5 +33,4 @@ public class ProductDTO {
     @JsonProperty("category_id")
     private Long categoryId;
 
-    private List<MultipartFile> files;
 }
